@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Himanshi weds Ayush</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<svg class="hid-svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8e6a8"/><stop offset=".45" stop-color="#d2a94c"/><stop offset=".62" stop-color="#9a7424"/><stop offset="1" stop-color="#efd78f"/>
+    </linearGradient>
+  </defs>
+</svg>
+</head>
+<body>
+
+<!-- ================= STAGE: loader + 3D book ================= -->
+<div id="stage" role="dialog" aria-label="Wedding invitation cover">
+  <div class="rose-layer" id="roseBack"></div>
+  <div class="scene3d">
+    <div class="zoomer">
+      <div class="book" id="book" role="button" tabindex="0" aria-label="Tap the book to open">
+        <div class="book-floor"></div>
+        <div class="pages"></div>
+        <div class="cover">
+          <div class="face back"></div>
+          <div class="face front">
+            <div class="emblem"><img src="photos/ganpati.png" alt="Ganpati"></div>
+            <div class="cover-title"><small>श्री गणेशाय नमः</small>Himanshi &amp; Ayush</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rose-layer" id="roseFront" style="z-index:4"></div>
+  <div class="loader" id="loader"><i></i>Preparing your invitation</div>
+  <div class="tap-hint" id="hint">Tap the book to open</div>
+</div>
+<canvas id="fx"></canvas>
+<div id="garlands" aria-hidden="true"></div>
+<div id="fixed-flora" aria-hidden="true"></div>
+<button id="music" type="button" aria-label="Play or pause music">
+  <svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  <svg class="eq" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+</button>
+<div class="toast" id="toast" role="status"></div>
+
+<main id="main">
+  <!-- first page -->
+  <section class="sec hero" id="hero" style="padding-top:0;padding-bottom:10px">
+    <div class="arch">
+      <img class="bgph" id="bgph" alt="" decoding="async">
+      <div class="veil"></div>
+      <div class="medal"><img src="photos/ganpati.png" alt="Ganpati"></div>
+      <div class="h-line" style="--fd:.2s">Together with their families</div>
+      <h1 class="nm" id="bname" aria-label="Himanshi" style="--o:.5s"></h1>
+      <div class="rel" style="--fd:1.5s">Daughter of <b>Reena &amp; Pankaj Gupta</b></div>
+      <div class="amp" style="--fd:1.7s">&amp;</div>
+      <h1 class="nm" id="gname" aria-label="Ayush" style="--o:2.1s"></h1>
+      <div class="rel" style="--fd:3.2s">Son of <b>Indira &amp; Sanjay Gupta</b></div>
+      <div class="inv" style="--fd:3.6s">request the pleasure of your company at the wedding of <b>Himanshi &amp; Ayush</b></div>
+      <svg class="down" viewBox="0 0 26 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="--fd:4.1s"><path d="M13 3v24M4 19l9 9 9-9"/></svg>
+    </div>
+  </section>
+
+  <!-- save the date -->
+  <section class="sec" id="save">
+    <p class="eyebrow rv">Save the date</p>
+    <h2 class="h2 rv" style="--d:.1s">Pull to reveal</h2>
+    <div class="orn rv" style="--d:.2s"><i></i></div>
+    <div class="sd-wrap" id="sdw">
+      <div class="rod top"></div>
+      <div class="roll"></div>
+      <div class="paper" id="paper">
+        <div class="paper-in" id="paperIn">
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <div class="medal"><img src="photos/ganpati.png" alt="Ganpati"></div>
+          <div class="sd-t">Save the Date</div>
+          <div class="sd-m">Sunday</div>
+          <div class="sd-d">31</div>
+          <div class="sd-m">January 2027</div>
+          <div class="sd-w">Baraat 8:00 pm</div>
+          <div class="sd-p">Pheras at 2:00 am, 1 February</div>
+        </div>
+      </div>
+      <div class="rod bot" id="rodB">
+        <div class="tassel-wrap">
+          <button class="tassel" id="tassel" type="button" aria-label="Pull the tassel to unroll the scroll">
+            <svg viewBox="0 0 60 128">
+              <defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#9a1f3a"/><stop offset=".5" stop-color="#d14a63"/><stop offset="1" stop-color="#7a1429"/></linearGradient></defs>
+              <path d="M30 0V34" stroke="#c9a24b" stroke-width="3"/>
+              <circle cx="30" cy="38" r="9" fill="url(#gg)" stroke="#8f6d22"/>
+              <rect x="22" y="46" width="16" height="9" rx="2" fill="url(#gg)" stroke="#8f6d22"/>
+              <path d="M30 55 L12 120 Q30 128 48 120 Z" fill="url(#tg)"/>
+              <path d="M22 60V122M30 56V126M38 60V122" stroke="rgba(255,220,225,.5)" stroke-width="1"/>
+              <rect x="17" y="64" width="26" height="5" rx="2" fill="url(#gg)" stroke="#8f6d22" stroke-width=".6"/>
+            </svg>
+          </button>
+          <div class="hintf" id="hintf"><svg viewBox="0 0 54 80"><circle cx="27" cy="14" r="12" fill="rgba(110,31,47,.12)"/><path d="M22 10c0-4 9-4 9 0v26l3-1c3-1 5 1 5 3l3-.5c3-.5 4 2 4 3l3-.3c2 0 3 2 3 4v10c0 12-8 20-18 20-8 0-12-4-16-11L8 41c-2-4 2-7 5-5l5 5z" fill="#fff6ea" stroke="#6e1f2f" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Pull</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cd rv" id="cd" aria-live="off"></div>
+    <div class="row-c rv"><a class="btn fill" id="calBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Add to calendar</a></div>
+  </section>
+
+  <!-- festivities -->
+  <section class="sec" id="fest" style="padding-left:0;padding-right:0">
+    <p class="eyebrow rv">Wedding festivities</p>
+    <h2 class="h2 rv" style="--d:.1s">Wedding celebrations</h2>
+    <p class="sub rv" style="--d:.2s">Join us for joyful moments, from Kanpur to Shahdara.</p>
+    <div class="cf" id="cfF" style="--cw:min(76vw,300px);--ch:418px">
+      <div class="cf-stage"></div>
+      <button class="cf-nav p" type="button" aria-label="Previous function"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="cf-nav n" type="button" aria-label="Next function"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="dots" id="dF"></div>
+  </section>
+
+  <!-- story -->
+  <section class="sec" id="story" style="padding-left:0;padding-right:0">
+    <p class="eyebrow rv">Our story</p>
+    <h2 class="h2 rv" style="--d:.1s">Moments we love</h2>
+    <p class="sub rv" style="--d:.2s">A few frames from the road that led us here.</p>
+    <div class="cf" id="cfP" style="--cw:min(70vw,285px);--ch:min(94vw,380px)">
+      <div class="cf-stage"></div>
+      <button class="cf-nav p" type="button" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="cf-nav n" type="button" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="dots" id="dP"></div>
+  </section>
+
+  <!-- location -->
+  <section class="sec" id="loc">
+    <p class="eyebrow rv">Location</p>
+    <h2 class="h2 rv" style="--d:.1s">Find your way to us</h2>
+    <p class="sub rv" style="--d:.2s">Tap a location card to open it in Google Maps.</p>
+    <div class="map-grid">
+      <a class="mapc rv" href="https://maps.app.goo.gl/P1CVJMEmg1Nocf5i7" target="_blank" rel="noopener" aria-label="Open Yashoda Nagar, Kanpur in Google Maps">
+        <svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="320" height="220" fill="#efe6d2"/>
+          <g fill="#e2d6bd"><rect x="12" y="12" width="70" height="48" rx="5"/><rect x="100" y="14" width="56" height="40" rx="5"/><rect x="180" y="10" width="64" height="52" rx="5"/><rect x="262" y="14" width="48" height="44" rx="5"/><rect x="14" y="82" width="52" height="56" rx="5"/><rect x="100" y="88" width="80" height="44" rx="5"/><rect x="214" y="84" width="38" height="50" rx="5"/><rect x="270" y="86" width="40" height="52" rx="5"/><rect x="16" y="160" width="76" height="40" rx="5"/><rect x="118" y="156" width="60" height="48" rx="5"/><rect x="204" y="160" width="50" height="40" rx="5"/></g>
+          <g fill="#cfe0c4"><rect x="262" y="160" width="48" height="44" rx="8"/><rect x="190" y="70" width="14" height="10" rx="3"/></g>
+          <path d="M-10 120 C60 100 110 150 170 136 S280 100 340 124" fill="none" stroke="#c4dbe0" stroke-width="16" stroke-linecap="round"/>
+          <g stroke="#fffaf0" stroke-width="7" stroke-linecap="round" fill="none"><path d="M0 70H320"/><path d="M0 148H320"/><path d="M90 0V220"/><path d="M168 0V220"/><path d="M252 0V220"/></g>
+          <g stroke="#fffaf0" stroke-width="3" fill="none"><path d="M0 40H320"/><path d="M0 108H320"/><path d="M0 182H320"/><path d="M40 0V220"/><path d="M210 0V220"/><path d="M290 0V220"/></g>
+          <path class="route" pathLength="1" d="M30 198 L90 198 L90 148 L168 148 L168 70 L252 70" fill="none" stroke="#6e1f2f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="30" cy="198" r="6" fill="#fffaf0" stroke="#6e1f2f" stroke-width="3"/>
+          <circle class="pulse" cx="252" cy="70" r="12" fill="#6e1f2f" opacity=".5"/>
+          <g class="pin"><path d="M252 70C242 56 238 50 238 42a14 14 0 0 1 28 0c0 8-4 14-14 28Z" fill="#6e1f2f" stroke="#fffaf0" stroke-width="2"/><circle cx="252" cy="42" r="5.5" fill="#efd994"/></g>
+        </svg>
+        <div class="cap"><b>Kanpur</b><div>Yashoda Nagar, Kanpur</div><span>Open map</span></div>
+      </a>
+      <a class="mapc rv" href="https://maps.app.goo.gl/XsEvdFguxAwnevya8" target="_blank" rel="noopener" aria-label="Open Shahdara, Delhi in Google Maps">
+        <svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="320" height="220" fill="#efe6d2"/>
+          <g fill="#e2d6bd"><rect x="12" y="12" width="70" height="48" rx="5"/><rect x="100" y="14" width="56" height="40" rx="5"/><rect x="180" y="10" width="64" height="52" rx="5"/><rect x="262" y="14" width="48" height="44" rx="5"/><rect x="14" y="82" width="52" height="56" rx="5"/><rect x="100" y="88" width="80" height="44" rx="5"/><rect x="214" y="84" width="38" height="50" rx="5"/><rect x="270" y="86" width="40" height="52" rx="5"/><rect x="16" y="160" width="76" height="40" rx="5"/><rect x="118" y="156" width="60" height="48" rx="5"/><rect x="204" y="160" width="50" height="40" rx="5"/></g>
+          <g fill="#cfe0c4"><rect x="262" y="160" width="48" height="44" rx="8"/><rect x="190" y="70" width="14" height="10" rx="3"/></g>
+          <path d="M-10 120 C60 100 110 150 170 136 S280 100 340 124" fill="none" stroke="#c4dbe0" stroke-width="16" stroke-linecap="round"/>
+          <g stroke="#fffaf0" stroke-width="7" stroke-linecap="round" fill="none"><path d="M0 70H320"/><path d="M0 148H320"/><path d="M90 0V220"/><path d="M168 0V220"/><path d="M252 0V220"/></g>
+          <g stroke="#fffaf0" stroke-width="3" fill="none"><path d="M0 40H320"/><path d="M0 108H320"/><path d="M0 182H320"/><path d="M40 0V220"/><path d="M210 0V220"/><path d="M290 0V220"/></g>
+          <path class="route" pathLength="1" d="M30 198 L90 198 L90 148 L168 148 L168 70 L252 70" fill="none" stroke="#6e1f2f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="30" cy="198" r="6" fill="#fffaf0" stroke="#6e1f2f" stroke-width="3"/>
+          <circle class="pulse" cx="252" cy="70" r="12" fill="#6e1f2f" opacity=".5"/>
+          <g class="pin"><path d="M252 70C242 56 238 50 238 42a14 14 0 0 1 28 0c0 8-4 14-14 28Z" fill="#6e1f2f" stroke="#fffaf0" stroke-width="2"/><circle cx="252" cy="42" r="5.5" fill="#efd994"/></g>
+        </svg>
+        <div class="cap"><b>Delhi</b><div>Shahdara, Delhi</div><span>Open map</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- closing -->
+  <section class="sec close" id="close">
+    <div class="medal rv"><img src="photos/ganpati.png" alt="Ganpati"></div>
+    <div class="orn rv" style="--d:.1s"><i></i></div>
+    <p class="big rv" style="--d:.2s">We can't wait to celebrate with you</p>
+    <div class="fam rv" style="--d:.35s">
+      <small style="margin-top:10px">Bride's family</small><span>Reena &amp; Pankaj Gupta</span>
+      <small style="margin-top:10px">Groom's family</small><span>Indira &amp; Sanjay Gupta</span>
+    </div>
+    <p class="with rv" style="--d:.5s">With love, the Gupta families</p>
+  </section>
+</main>
+
+<script src="wedding-config.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
